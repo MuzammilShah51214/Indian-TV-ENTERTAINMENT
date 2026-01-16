@@ -2389,7 +2389,7 @@ header {
     </div>
     
     <script>
-// Complete JavaScript for All Player Types with Direct Browser Support
+/// Complete JavaScript for IndianTV-Live with AppCreator24 Protection
 document.addEventListener("DOMContentLoaded", function() {
     // Detect AppCreator24
     const isAppCreator24 = (typeof Android !== 'undefined') || 
@@ -2398,7 +2398,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     console.log("AppCreator24 Detection:", isAppCreator24 ? "YES" : "NO");
     
-    // DOM Elements
+    // ========== DOM ELEMENTS ==========
     const serverSelectionModal = document.getElementById('server-selection-modal');
     const serverCloseBtn = document.getElementById('server-close-btn');
     const serverOptions = document.getElementById('server-options');
@@ -2432,7 +2432,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentChannelData = null;
     let selectedServer = null;
     
-    // --- Check URL Types ---
+    // ========== URL TYPE CHECKING ==========
     function isJioTVM3U8(url) {
         return url && url.includes('mini.allinonereborn.fun') && url.includes('.m3u8');
     }
@@ -2450,11 +2450,11 @@ document.addEventListener("DOMContentLoaded", function() {
                       url.includes('v5on.site') || url.includes('play.php'));
     }
     
-    // --- Open in Browser (for JioTV M3U8) ---
-    function openInBrowser(url) {
-        console.log("Opening in browser:", url);
+    // ========== APP CREATOR 24 PROTECTION ==========
+    function forceOpenInBrowser(url) {
+        console.log("Force opening in browser (AppCreator24):", url);
         
-        // Special handling for AppCreator24
+        // For AppCreator24 - Special handling
         if (isAppCreator24) {
             // Method 1: Use Android interface if available
             if (typeof Android !== 'undefined' && Android.openBrowser) {
@@ -2462,35 +2462,50 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
             
-            // Method 2: Create a hidden link and click it
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            link.style.display = 'none';
-            link.id = 'direct-browser-link-' + Date.now();
-            
-            // Add special attributes to prevent ExoPlayer interception
-            link.setAttribute('data-exoplayer', 'false');
-            link.setAttribute('data-type', 'browser');
-            
-            document.body.appendChild(link);
-            
-            // Simulate click
-            const event = new MouseEvent('click', {
-                view: window,
-                bubbles: true,
-                cancelable: true
-            });
-            link.dispatchEvent(event);
-            
-            // Clean up
-            setTimeout(() => {
-                if (link.parentNode) {
-                    link.parentNode.removeChild(link);
+            // Method 2: Create multiple hidden links with different approaches
+            const methods = [
+                () => {
+                    // Regular link
+                    const link1 = document.createElement('a');
+                    link1.href = url + '?format=html5&player=browser&nocache=' + Date.now();
+                    link1.target = '_blank';
+                    link1.rel = 'noopener noreferrer';
+                    link1.style.display = 'none';
+                    document.body.appendChild(link1);
+                    link1.click();
+                    setTimeout(() => document.body.removeChild(link1), 100);
+                },
+                () => {
+                    // Link with data attributes
+                    const link2 = document.createElement('a');
+                    link2.href = url;
+                    link2.target = '_blank';
+                    link2.setAttribute('data-exoplayer', 'false');
+                    link2.setAttribute('data-player', 'browser');
+                    link2.setAttribute('data-type', 'video');
+                    link2.style.display = 'none';
+                    document.body.appendChild(link2);
+                    link2.click();
+                    setTimeout(() => document.body.removeChild(link2), 100);
+                },
+                () => {
+                    // JavaScript navigation
+                    window.location.href = 'about:blank';
+                    setTimeout(() => {
+                        window.open(url, '_blank');
+                    }, 50);
                 }
-            }, 1000);
+            ];
             
+            // Try all methods
+            for (const method of methods) {
+                try {
+                    method();
+                    break;
+                } catch (e) {
+                    console.log("Method failed, trying next...");
+                }
+            }
             return;
         }
         
@@ -2498,11 +2513,10 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(url, '_blank', 'noopener,noreferrer');
     }
     
-    // --- Close All Players ---
+    // ========== PLAYER FUNCTIONS ==========
     function closeAllPlayers() {
         playerContainers.forEach(c => c.classList.remove('visible'));
         
-        // Stop all players
         if (html5VideoPlayer) {
             html5VideoPlayer.pause();
             html5VideoPlayer.src = '';
@@ -2520,13 +2534,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // --- Play in HTML5 Player (for HLS streams) ---
     function playHTML5Stream(url, logo, name) {
         closeAllPlayers();
         html5PlayerContainer.classList.add('visible');
         html5LoadingSpinner.style.display = 'block';
         
-        // Reset video
         html5VideoPlayer.src = '';
         html5VideoPlayer.load();
         
@@ -2539,12 +2551,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }).catch(e => {
                 html5LoadingSpinner.style.display = 'none';
                 console.error("HTML5 Player Error:", e);
-                alert("Unable to play stream: " + e.message);
             });
         }, 100);
     }
     
-    // --- Play in Shaka Player (for MPD/DASH streams) ---
     function initShakaPlayer() {
         if (typeof shaka === 'undefined') {
             console.error("Shaka Player library not loaded");
@@ -2580,19 +2590,16 @@ document.addEventListener("DOMContentLoaded", function() {
         shakaPlayerContainer.classList.add('visible');
         shakaLoadingSpinner.style.display = 'block';
         
-        // Initialize Shaka Player if needed
         if (!shakaPlayer) {
             shakaPlayer = initShakaPlayer();
         }
         
         if (!shakaPlayer) {
             shakaLoadingSpinner.style.display = 'none';
-            alert("Shaka Player not supported. Trying HTML5 player...");
             playHTML5Stream(url, logo, name);
             return;
         }
         
-        // Configure DRM if keys provided
         if (keyId && key) {
             shakaPlayer.configure({
                 drm: {
@@ -2603,18 +2610,15 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
         
-        // Load and play the stream
         shakaPlayer.load(url).then(() => {
             shakaLoadingSpinner.style.display = 'none';
             return shakaVideoPlayer.play();
         }).catch(error => {
             shakaLoadingSpinner.style.display = 'none';
             console.error("Shaka Player Load Error:", error);
-            alert("Error loading DASH stream: " + error.message);
         });
     }
     
-    // --- Play in iFrame Player ---
     function playIframeStream(url, logo, name) {
         closeAllPlayers();
         iframePlayerContainer.classList.add('visible');
@@ -2627,7 +2631,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 2000);
     }
     
-    // --- Play Selected Server ---
+    function autoDetectAndPlay(url, keyId, key, logo, name) {
+        if (isMPD(url)) {
+            playShakaStream(url, keyId, key, logo, name);
+        } else if (isM3U8(url)) {
+            playHTML5Stream(url, logo, name);
+        } else if (isIframe(url)) {
+            playIframeStream(url, logo, name);
+        } else {
+            playHTML5Stream(url, logo, name);
+        }
+    }
+    
+    // ========== CORE PLAY LOGIC ==========
     function playSelectedServer() {
         if (!selectedServer || !currentChannelData) return;
         
@@ -2636,21 +2652,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
         console.log("Playing:", selectedServer.name, "URL:", url, "Type:", serverType);
         
-        // 1. First check if it's a direct browser link
-        if (serverType === 'browser' || serverType === 'direct') {
-            openInBrowser(url);
+        // CRITICAL: FORCE JioTV M3U8 to open in browser
+        if (isJioTVM3U8(url) || serverType === 'browser' || serverType === 'direct') {
+            forceOpenInBrowser(url);
             serverSelectionModal.classList.remove('active');
             return;
         }
         
-        // 2. Check if it's JioTV M3U8 (open in browser)
-        if (isJioTVM3U8(url)) {
-            openInBrowser(url);
-            serverSelectionModal.classList.remove('active');
-            return;
-        }
-        
-        // 3. Check player type from server data
+        // Normal player logic for other streams
         if (serverPlayer) {
             switch(serverPlayer) {
                 case 'html5':
@@ -2663,39 +2672,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     playIframeStream(url, channelLogo, channelName);
                     break;
                 default:
-                    // Auto-detect
                     autoDetectAndPlay(url, keyId, key, channelLogo, channelName);
             }
         } else {
-            // Auto-detect based on URL
             autoDetectAndPlay(url, keyId, key, channelLogo, channelName);
         }
         
         serverSelectionModal.classList.remove('active');
     }
     
-    // --- Auto-detect and Play ---
-    function autoDetectAndPlay(url, keyId, key, logo, name) {
-        if (isMPD(url)) {
-            // MPD/DASH stream - use Shaka Player
-            playShakaStream(url, keyId, key, logo, name);
-        } else if (isM3U8(url)) {
-            // HLS stream - use HTML5 Player
-            playHTML5Stream(url, logo, name);
-        } else if (isIframe(url)) {
-            // iFrame stream
-            playIframeStream(url, logo, name);
-        } else {
-            // Default to HTML5 Player
-            playHTML5Stream(url, logo, name);
-        }
-    }
-    
-    // --- Setup Channel Buttons ---
+    // ========== CHANNEL BUTTONS SETUP ==========
     function setupChannelButtons() {
         buttons.forEach(btn => {
             btn.addEventListener('click', function(e) {
-                // Prevent default for AppCreator24
                 if (isAppCreator24) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -2709,7 +2698,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 serverChannelName.textContent = this.querySelector('.channel-name').textContent;
                 serverOptions.innerHTML = '';
                 
-                // Store channel data
                 currentChannelData = { 
                     playerType: this.getAttribute('data-player'), 
                     channelName: serverChannelName.textContent, 
@@ -2717,18 +2705,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     servers: servers
                 };
                 
-                // Create server options
                 servers.forEach((server, index) => {
                     const opt = document.createElement('div');
                     opt.className = `server-option ${server.status === 'online' ? '' : 'disabled'}`;
                     
-                    // Determine player type indicator
                     let playerIndicator = '';
-                    let isDirectLink = false;
+                    const isJioTV = isJioTVM3U8(server.url);
                     
-                    if (server.type === 'browser' || server.type === 'direct' || isJioTVM3U8(server.url)) {
+                    if (isJioTV || server.type === 'browser' || server.type === 'direct') {
                         playerIndicator = '<span style="color: var(--neon-green); margin-left: 10px; font-size: 10px;">[BROWSER]</span>';
-                        isDirectLink = true;
                     } else if (server.player === 'shaka' || isMPD(server.url)) {
                         playerIndicator = '<span style="color: var(--neon-pink); margin-left: 10px; font-size: 10px;">[SHAKA/MPD]</span>';
                     } else if (server.player === 'html5' || isM3U8(server.url)) {
@@ -2759,7 +2744,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // --- Setup Filter Buttons ---
+    // ========== FILTER BUTTONS ==========
     function setupFilterButtons() {
         filterButtons.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2778,64 +2763,37 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // --- Prevent AppCreator24 Interception ---
-    function preventAppCreator24Interception() {
-        if (!isAppCreator24) return;
-        
-        console.log("Activating AppCreator24 Protection");
-        
-        // Override click events
-        document.addEventListener('click', function(e) {
-            let target = e.target;
-            
-            // Find anchor tag
-            while (target && target.tagName !== 'A' && target !== document.body) {
-                target = target.parentElement;
-            }
-            
-            if (target && target.tagName === 'A' && target.href) {
-                const url = target.href;
-                
-                // Prevent AppCreator24 from intercepting ALL M3U8 links
-                if (url.includes('.m3u8')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    
-                    console.log("Prevented AppCreator24 interception for M3U8:", url);
-                    
-                    // Open in browser
-                    openInBrowser(url);
-                    return false;
-                }
-            }
-        }, true);
-        
-        // Additional protection: Modify all M3U8 URLs
-        document.querySelectorAll('a[href*=".m3u8"]').forEach(anchor => {
-            const originalUrl = anchor.href;
-            // Add parameter to prevent ExoPlayer
-            anchor.href = originalUrl + (originalUrl.includes('?') ? '&' : '?') + 
-                         '_format=browser&_nocache=' + Date.now();
-        });
-    }
-    
-    // --- Initialize Everything ---
+    // ========== INITIALIZE ==========
     function init() {
-        console.log("Initializing IndianTV-Live Player with Direct Browser Support");
+        console.log("Initializing IndianTV-Live Player");
         
-        // Activate AppCreator24 protection FIRST
+        // Activate click protection for AppCreator24
         if (isAppCreator24) {
-            preventAppCreator24Interception();
+            document.addEventListener('click', function(e) {
+                let target = e.target;
+                
+                while (target && target.tagName !== 'A' && target !== document.body) {
+                    target = target.parentElement;
+                }
+                
+                if (target && target.tagName === 'A' && target.href) {
+                    const url = target.href;
+                    if (url.includes('.m3u8')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        forceOpenInBrowser(url);
+                        return false;
+                    }
+                }
+            }, true);
+            
             console.log("AppCreator24 Protection: ACTIVE");
-            console.log("All M3U8 links will open in browser");
         }
         
-        // Setup event listeners
+        // Setup everything
         setupChannelButtons();
         setupFilterButtons();
         
-        // Close buttons
         serverCloseBtn.addEventListener('click', () => {
             serverSelectionModal.classList.remove('active');
         });
@@ -2844,46 +2802,26 @@ document.addEventListener("DOMContentLoaded", function() {
         html5PlayerClose.addEventListener('click', closeAllPlayers);
         shakaPlayerClose.addEventListener('click', closeAllPlayers);
         
-        // Close modal when clicking outside
         serverSelectionModal.addEventListener('click', (e) => {
             if (e.target === serverSelectionModal) {
                 serverSelectionModal.classList.remove('active');
             }
         });
         
-        // Handle direct anchor tags (for go: links)
+        // Handle direct go: links
         document.querySelectorAll('a[href^="go:"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const url = this.getAttribute('href');
-                
-                // Convert go: links to direct URLs
-                const goLink = url.replace('go:', '');
-                let directUrl = '';
-                
-                // Map go: links to actual URLs
-                const goLinkMap = {
-                    'starplus': 'https://wasitv-pro.site/abbas/rapid.php?url=https://zx.visiona.top:8443/sportshdd/starplus/chunks.m3u8',
-                    'starb': 'https://wasitv-pro.site/abbas/rapid.php?url=https://zx.visiona.top:8443/sportshdd/insb23/chunks.m3u8',
-                    'starg': 'https://wasitv-pro.site/abbas/rapid.php?url=https://zx.visiona.top:8443/sportshdd/insb20/chunks.m3u8',
-                    // Add more mappings as needed
-                };
-                
-                if (goLinkMap[goLink]) {
-                    directUrl = goLinkMap[goLink];
-                    openInBrowser(directUrl);
-                } else {
-                    openInBrowser(url);
-                }
+                forceOpenInBrowser(url);
             });
         });
         
-        console.log("Player Initialized Successfully");
-        console.log("Colors TV → Browser (Direct)");
-        console.log("JioTV M3U8 → Browser");
-        console.log("MPD/DASH → Shaka Player");
-        console.log("HLS → HTML5 Player");
-        console.log("iFrame → iFrame Player");
+        console.log("Player Types Configuration:");
+        console.log("1. Colors TV (JioTV M3U8) → Browser");
+        console.log("2. Zee TV (MPD) → Shaka Player");
+        console.log("3. Sony TV (HLS) → HTML5 Player");
+        console.log("4. Star UTSAV (iFrame) → iFrame Player");
     }
     
     // Start the app
