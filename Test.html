@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" 
       class="scroll-smooth"
@@ -28,7 +27,7 @@
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 
-        <!-- Primary SEO Meta Tags -->
+    <!-- Primary SEO Meta Tags -->
     <meta name="description" content="Watch StarPlus live streaming in high quality. Free 24/7 online television, daily schedule, and regional broadcasts.">
     <meta name="keywords" content="live tv, watch live stream, free online television, news live, sports stream, regional live tv">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -47,7 +46,7 @@
     <meta name="twitter:image" content="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_PLUS/images/LOGO_HD/image.png">
 
     <!-- Schema.org JSON-LD Structured Data -->
-        <script type="application/ld+json">
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "BroadcastService",
@@ -85,8 +84,8 @@
     <!-- Canonical URL Tag for SEO -->
     <link rel="canonical" href="https://bx-tv.com/watch/starplus-e4a5b6">
   
-     <!-- Right click disable -->
-  <body oncontextmenu="return false;" ondragstart="return false;" ...>
+    <!-- Right click disable -->
+    <body oncontextmenu="return false;" ondragstart="return false;">
   
     <!-- Tailwind CSS (Loads Synchronously in Head to Prevent Flash) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -205,206 +204,196 @@
 
     <!-- Google Tag Manager -->
     
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-    
-
- 
-                                                    
-
-    
-
-    
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-function formatLocalTime(dateStr) {
-    if (!dateStr) return '';
-    try {
-        const date = new Date(dateStr.replace(' ', 'T'));
-        if (isNaN(date.getTime())) {
+    <script>
+    function formatLocalTime(dateStr) {
+        if (!dateStr) return '';
+        try {
+            const date = new Date(dateStr.replace(' ', 'T'));
+            if (isNaN(date.getTime())) {
+                return dateStr;
+            }
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+        } catch (e) {
             return dateStr;
         }
-        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-    } catch (e) {
-        return dateStr;
     }
-}
-</script>
+    </script>
 
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('watchApp', () => ({
-            channelData: {"id":102820,"slug":"starplus-e4a5b6","name":"StarPlus","logo":"https:\/\/xstreamcp-assets-msp.streamready.in\/assets\/LIVETV\/LIVECHANNEL\/LIVETV_LIVETVCHANNEL_STAR_PLUS\/images\/LOGO_HD\/image.png","country":"in","category":"entertainment"},
-            relatedSlugs: ["aakaash-aath-748327","anjan-tv-f8c540","anmol-tv-54309d","big-magic-c37824","colors-c511b2","colors-infinity-9a8b06","colors-mena-7912d1","colors-super-2dd58c","dangal-2-542058","dd-national-bc3147","desi-channel-7b464a","e-24-f2a97d","epic-bharat-0b372a","epic-tv-b33fc0","etv-josh-4608ce","etv-plus-c55fa0","gangaur-tv-c111fd","mahaa-max-c6788e","manoranjan-prime-1b58a8","manoranjan-tv-16cc39"],
-            isReporting: false,
-            reported: false,
-            reportMessage: '',
-            isPlaying: true,
-            isMuted: false,
-            volume: 1,
-            levels: [],
-            currentLevel: -1,
-            audioTracks: [],
-            currentAudioTrack: -1,
-            showSettings: false,
-            showAudioMenu: false,
-            isFloating: false,
-            controlsVisible: true,
-            controlsTimeout: null,
-            touchStartX: 0,
-            touchEndX: 0,
-            init() {
-                if (this.$store && this.$store.history) {
-                    this.$store.history.add(this.channelData);
-                }
-            },
-            hideControlsTimer() {
-                clearTimeout(this.controlsTimeout);
-                this.controlsVisible = true;
-                this.controlsTimeout = setTimeout(() => {
-                    if (this.isPlaying && !this.showSettings && !this.showAudioMenu) {
-                        this.controlsVisible = false;
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('watchApp', () => ({
+                channelData: {"id":102820,"slug":"starplus-e4a5b6","name":"StarPlus","logo":"https:\/\/xstreamcp-assets-msp.streamready.in\/assets\/LIVETV\/LIVECHANNEL\/LIVETV_LIVETVCHANNEL_STAR_PLUS\/images\/LOGO_HD\/image.png","country":"in","category":"entertainment"},
+                relatedSlugs: ["aakaash-aath-748327","anjan-tv-f8c540","anmol-tv-54309d","big-magic-c37824","colors-c511b2","colors-infinity-9a8b06","colors-mena-7912d1","colors-super-2dd58c","dangal-2-542058","dd-national-bc3147","desi-channel-7b464a","e-24-f2a97d","epic-bharat-0b372a","epic-tv-b33fc0","etv-josh-4608ce","etv-plus-c55fa0","gangaur-tv-c111fd","mahaa-max-c6788e","manoranjan-prime-1b58a8","manoranjan-tv-16cc39"],
+                isReporting: false,
+                reported: false,
+                reportMessage: '',
+                isPlaying: true,
+                isMuted: false,
+                volume: 1,
+                levels: [],
+                currentLevel: -1,
+                audioTracks: [],
+                currentAudioTrack: -1,
+                showSettings: false,
+                showAudioMenu: false,
+                isFloating: false,
+                controlsVisible: true,
+                controlsTimeout: null,
+                touchStartX: 0,
+                touchEndX: 0,
+                init() {
+                    if (this.$store && this.$store.history) {
+                        this.$store.history.add(this.channelData);
                     }
-                }, 4000);
-            },
-            togglePlay() {
-                const v = document.getElementById('videoPlayer');
-                if (!v) return;
-                if (v.paused) { v.play(); this.isPlaying = true; } 
-                else { v.pause(); this.isPlaying = false; }
-            },
-            toggleMute() {
-                const v = document.getElementById('videoPlayer');
-                if (!v) return;
-                v.muted = !v.muted;
-                this.isMuted = v.muted;
-            },
-            setVolume(val) {
-                const v = document.getElementById('videoPlayer');
-                if (!v) return;
-                this.volume = parseFloat(val);
-                v.volume = this.volume;
-                v.muted = (this.volume === 0);
-                this.isMuted = v.muted;
-            },
-            toggleFullscreen() {
-                const container = document.getElementById('videoPlayerViewport');
-                if (!container) return;
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                    if (container.requestFullscreen) {
-                        container.requestFullscreen().catch(() => {});
-                    } else if (container.webkitRequestFullscreen) {
-                        container.webkitRequestFullscreen();
+                },
+                hideControlsTimer() {
+                    clearTimeout(this.controlsTimeout);
+                    this.controlsVisible = true;
+                    this.controlsTimeout = setTimeout(() => {
+                        if (this.isPlaying && !this.showSettings && !this.showAudioMenu) {
+                            this.controlsVisible = false;
+                        }
+                    }, 4000);
+                },
+                togglePlay() {
+                    const v = document.getElementById('videoPlayer');
+                    if (!v) return;
+                    if (v.paused) { v.play(); this.isPlaying = true; } 
+                    else { v.pause(); this.isPlaying = false; }
+                },
+                toggleMute() {
+                    const v = document.getElementById('videoPlayer');
+                    if (!v) return;
+                    v.muted = !v.muted;
+                    this.isMuted = v.muted;
+                },
+                setVolume(val) {
+                    const v = document.getElementById('videoPlayer');
+                    if (!v) return;
+                    this.volume = parseFloat(val);
+                    v.volume = this.volume;
+                    v.muted = (this.volume === 0);
+                    this.isMuted = v.muted;
+                },
+                toggleFullscreen() {
+                    const container = document.getElementById('videoPlayerViewport');
+                    if (!container) return;
+                    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen().catch(() => {});
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else {
+                            const v = document.getElementById('videoPlayer');
+                            if (v && v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+                        }
                     } else {
-                        const v = document.getElementById('videoPlayer');
-                        if (v && v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen().catch(() => {});
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        }
                     }
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen().catch(() => {});
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
+                },
+                togglePiP() {
+                    const v = document.getElementById('videoPlayer');
+                    if (!v) return;
+                    if (document.pictureInPictureElement) {
+                        document.exitPictureInPicture?.();
+                    } else if (document.pictureInPictureEnabled) {
+                        v.requestPictureInPicture?.();
                     }
-                }
-            },
-            togglePiP() {
-                const v = document.getElementById('videoPlayer');
-                if (!v) return;
-                if (document.pictureInPictureElement) {
-                    document.exitPictureInPicture?.();
-                } else if (document.pictureInPictureEnabled) {
-                    v.requestPictureInPicture?.();
-                }
-            },
-            handleTouchStart(e) {
-                this.touchStartX = e.changedTouches[0].screenX;
-            },
-            handleTouchEnd(e) {
-                this.touchEndX = e.changedTouches[0].screenX;
-                const diff = this.touchEndX - this.touchStartX;
-                if (Math.abs(diff) > 85 && this.relatedSlugs.length > 0) {
-                    if (diff < 0) {
-                        window.location.href = 'watch/' + encodeURIComponent(this.relatedSlugs[0]);
-                    } else {
-                        window.location.href = 'watch/' + encodeURIComponent(this.relatedSlugs[this.relatedSlugs.length - 1]);
+                },
+                handleTouchStart(e) {
+                    this.touchStartX = e.changedTouches[0].screenX;
+                },
+                handleTouchEnd(e) {
+                    this.touchEndX = e.changedTouches[0].screenX;
+                    const diff = this.touchEndX - this.touchStartX;
+                    if (Math.abs(diff) > 85 && this.relatedSlugs.length > 0) {
+                        if (diff < 0) {
+                            window.location.href = 'watch/' + encodeURIComponent(this.relatedSlugs[0]);
+                        } else {
+                            window.location.href = 'watch/' + encodeURIComponent(this.relatedSlugs[this.relatedSlugs.length - 1]);
+                        }
                     }
+                },
+                submitReport() {
+                    if (this.isReporting || this.reported) return;
+                    this.isReporting = true;
+                    fetch('api-report.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ channel_id: this.channelData.id })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.reported = true;
+                        this.reportMessage = data.message || 'Report submitted!';
+                        setTimeout(() => { this.reportMessage = ''; }, 4500);
+                    })
+                    .catch(() => {
+                        this.reportMessage = 'Unable to send report.';
+                        setTimeout(() => { this.reportMessage = ''; }, 4000);
+                    })
+                    .finally(() => { this.isReporting = false; });
                 }
-            },
-            submitReport() {
-                if (this.isReporting || this.reported) return;
-                this.isReporting = true;
-                fetch('api-report.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ channel_id: this.channelData.id })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    this.reported = true;
-                    this.reportMessage = data.message || 'Report submitted!';
-                    setTimeout(() => { this.reportMessage = ''; }, 4500);
-                })
-                .catch(() => {
-                    this.reportMessage = 'Unable to send report.';
-                    setTimeout(() => { this.reportMessage = ''; }, 4000);
-                })
-                .finally(() => { this.isReporting = false; });
-            }
-        }));
-    });
-</script>
+            }));
+        });
+    </script>
 
-<div class="space-y-4" id="bxtvWatchScope" x-data="watchApp()">
+    <div class="space-y-4" id="bxtvWatchScope" x-data="watchApp()">
 
-    <!-- Alert Toast Feedback -->
-    <div x-show="reportMessage !== ''" 
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-         class="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 py-2 px-3 sm:py-3.5 sm:px-4 rounded-xl sm:rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-xl backdrop-blur-md text-[11px] sm:text-xs font-semibold text-white flex items-center gap-2 sm:gap-2.5 max-w-[85vw] sm:max-w-sm pointer-events-none"
-         style="display: none;">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse"></span>
-        <span class="truncate" x-text="reportMessage"></span>
-    </div>
+        <!-- Alert Toast Feedback -->
+        <div x-show="reportMessage !== ''" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+             x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+             class="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 py-2 px-3 sm:py-3.5 sm:px-4 rounded-xl sm:rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-xl backdrop-blur-md text-[11px] sm:text-xs font-semibold text-white flex items-center gap-2 sm:gap-2.5 max-w-[85vw] sm:max-w-sm pointer-events-none"
+             style="display: none;">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse"></span>
+            <span class="truncate" x-text="reportMessage"></span>
+        </div>
 
-    <!-- Main Viewport Sentinel for Scroll-down Mini Player -->
-    <div id="playerSentinel"></div>
+        <!-- Main Viewport Sentinel for Scroll-down Mini Player -->
+        <div id="playerSentinel"></div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
-        
-        <!-- Main Left Column -->
-        <div class="lg:col-span-2 space-y-4 sm:space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
             
-            <!-- Video Player Viewport Container -->
-            <div id="videoPlayerViewport" 
-                 :class="{ 'floating-pip-player': isFloating && !false }"
-                 @mousemove="hideControlsTimer()"
-                 @click="hideControlsTimer()"
-                 @touchstart="handleTouchStart($event)"
-                 @touchend="handleTouchEnd($event)"
-                 class="relative w-full aspect-video bg-black rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 dark:border-slate-800 select-none group">
+            <!-- Main Left Column -->
+            <div class="lg:col-span-2 space-y-4 sm:space-y-5">
                 
-                <!-- Transparent Watermark Logo Overlay -->
-                <div class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 pointer-events-none select-none transition-opacity duration-300 opacity-40 group-hover:opacity-80">
-                    <img src="assets/logo.png" 
-                         alt="BX-TV" 
-                         class="h-6 sm:h-10 md:h-12 w-auto max-w-[70px] sm:max-w-[120px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] filter contrast-125"
-                         onerror="this.style.display='none';">
-                </div>
+                <!-- Video Player Viewport Container -->
+                <div id="videoPlayerViewport" 
+                     :class="{ 'floating-pip-player': isFloating && !false }"
+                     @mousemove="hideControlsTimer()"
+                     @click="hideControlsTimer()"
+                     @touchstart="handleTouchStart($event)"
+                     @touchend="handleTouchEnd($event)"
+                     class="relative w-full aspect-video bg-black rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 dark:border-slate-800 select-none group">
+                    
+                    <!-- Transparent Watermark Logo Overlay -->
+                    <div class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 pointer-events-none select-none transition-opacity duration-300 opacity-40 group-hover:opacity-80">
+                        <img src="assets/logo.png" 
+                             alt="BX-TV" 
+                             class="h-6 sm:h-10 md:h-12 w-auto max-w-[70px] sm:max-w-[120px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] filter contrast-125"
+                             onerror="this.style.display='none';">
+                    </div>
 
-                <!-- Floating Close / Expand Button -->
-                <button x-show="isFloating" 
-                        @click.stop="isFloating = false" 
-                        class="absolute top-2 left-2 z-30 p-2 rounded-full bg-black/80 hover:bg-black text-white text-xs backdrop-blur-md transition shadow-md"
-                        title="Expand Player">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
-                </button>
+                    <!-- Floating Close / Expand Button -->
+                    <button x-show="isFloating" 
+                            @click.stop="isFloating = false" 
+                            class="absolute top-2 left-2 z-30 p-2 rounded-full bg-black/80 hover:bg-black text-white text-xs backdrop-blur-md transition shadow-md"
+                            title="Expand Player">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                    </button>
 
-                                    <!-- HTML5 / HLS Video Element -->
+                    <!-- HTML5 / HLS Video Element -->
                     <video id="videoPlayer" 
                            class="w-full h-full object-contain cursor-pointer" 
                            playsinline 
@@ -444,7 +433,7 @@ function formatLocalTime(dateStr) {
                             </div>
 
                             <div class="flex items-center justify-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1">
-                                <button onclick="initPlayer(false)" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-[10px] sm:text-xs transition shadow-sm">
+                                <button onclick="initPlayer()" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-[10px] sm:text-xs transition shadow-sm">
                                     Re-Tune
                                 </button>
                                 <button @click="submitReport()" class="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-300 border border-rose-900/60 font-semibold text-[10px] sm:text-xs transition">
@@ -545,269 +534,243 @@ function formatLocalTime(dateStr) {
                             </div>
                         </div>
                     </div>
-                            </div>
+                </div>
 
-            <!-- AdSense Responsive Placement (Below Player) -->
-            <div class="w-full overflow-hidden text-center my-2">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3940256099942544"
-                     data-ad-slot="6004445831"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <!-- AdSense Responsive Placement (Below Player) -->
+                <div class="w-full overflow-hidden text-center my-2">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3940256099942544"
+                         data-ad-slot="6004445831"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Core Engine Scripts -->
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+                const originalStream = "http://202.70.146.135:8000/play/a06c/index.m3u8";
 
-            
+                const isEmbed = false;
+                let hlsInstance = null;
+                let noiseInterval = null;
 
-                        
-                              
-                                                                            
-
-<!-- Core Engine Scripts -->
-<script>
-const originalStream = "http:\/\/202.70.146.135:8000\/play\/a06c\/index.m3u8";
-
-
-
-
-const isEmbed = false;
-const proxyBase = 'proxy.php?url=';
-let hlsInstance = null;
-let noiseInterval = null;
-
-function getAlpineScope() {
-    const el = document.getElementById('bxtvWatchScope');
-    return (window.Alpine && el) ? Alpine.$data(el) : null;
-}
-
-function triggerNativeCast() {
-    const video = document.getElementById('videoPlayer');
-    if (video && video.webkitShowPlaybackTargetPicker) {
-        video.webkitShowPlaybackTargetPicker();
-    } else if (window.chrome && window.chrome.cast) {
-        cast.framework.CastContext.getInstance().requestSession();
-    } else {
-        alert('Casting is supported via Google Cast on Chrome or AirPlay on Safari.');
-    }
-}
-
-function startNoiseAnimation() {
-    const canvas = document.getElementById('noiseCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    canvas.width = 240;
-    canvas.height = 160;
-    clearInterval(noiseInterval);
-    noiseInterval = setInterval(() => {
-        const idata = ctx.createImageData(canvas.width, canvas.height);
-        const buffer32 = new Uint32Array(idata.data.buffer);
-        const len = buffer32.length;
-        for (let i = 0; i < len; i++) {
-            if (Math.random() < 0.5) buffer32[i] = 0xffffffff;
-        }
-        ctx.putImageData(idata, 0, 0);
-    }, 45);
-}
-
-function stopNoiseAnimation() {
-    clearInterval(noiseInterval);
-}
-
-function setQualityLevel(lvlIdx) {
-    if (hlsInstance) {
-        hlsInstance.currentLevel = lvlIdx;
-        const scope = getAlpineScope();
-        if (scope) scope.currentLevel = lvlIdx;
-    }
-}
-
-function setAudioTrack(trackIdx) {
-    if (hlsInstance) {
-        hlsInstance.audioTrack = trackIdx;
-        const scope = getAlpineScope();
-        if (scope) scope.currentAudioTrack = trackIdx;
-    }
-}
-
-function initPlayer(useProxy = false) {
-    if (isEmbed) return;
-    const video = document.getElementById('videoPlayer');
-    const errorBox = document.getElementById('playerError');
-    if (!video || !errorBox) return;
-
-    const targetUrl = useProxy ? (proxyBase + encodeURIComponent(originalStream)) : originalStream;
-
-    errorBox.classList.add('hidden');
-    stopNoiseAnimation();
-
-    if (hlsInstance) {
-        hlsInstance.destroy();
-        hlsInstance = null;
-    }
-
-    if (Hls.isSupported() && originalStream.includes('.m3u8')) {
-        hlsInstance = new Hls({
-            enableWorker: true,
-            lowLatencyMode: true,
-            backBufferLength: 60
-        });
-
-        hlsInstance.loadSource(targetUrl);
-        hlsInstance.attachMedia(video);
-
-        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-            const scope = getAlpineScope();
-            if (scope) {
-                scope.levels = hlsInstance.levels || [];
-                scope.currentLevel = hlsInstance.currentLevel;
-                scope.audioTracks = hlsInstance.audioTracks || [];
-                scope.currentAudioTrack = hlsInstance.audioTrack;
-            }
-            video.play().catch(() => {});
-        });
-
-        hlsInstance.on(Hls.Events.AUDIO_TRACKS_UPDATED, function () {
-            const scope = getAlpineScope();
-            if (scope) {
-                scope.audioTracks = hlsInstance.audioTracks || [];
-                scope.currentAudioTrack = hlsInstance.audioTrack;
-            }
-        });
-
-        hlsInstance.on(Hls.Events.ERROR, function (event, data) {
-            if (data.fatal) {
-                if (!useProxy) {
-                    console.warn("Direct stream offline. Retrying via CORS Proxy...");
-                    initPlayer(true);
-                } else {
-                    console.error("Fatal Stream error:", data);
-                    errorBox.classList.remove('hidden');
-                    startNoiseAnimation();
+                function getAlpineScope() {
+                    const el = document.getElementById('bxtvWatchScope');
+                    return (window.Alpine && el) ? Alpine.$data(el) : null;
                 }
-            }
-        });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl') || originalStream.endsWith('.mp4')) {
-        video.src = targetUrl;
-        video.play().catch(() => {});
-        video.onerror = () => {
-            if (!useProxy) {
-                initPlayer(true);
-            } else {
-                errorBox.classList.remove('hidden');
-                startNoiseAnimation();
-            }
-        };
-    } else {
-        video.src = targetUrl;
-    }
-}
 
-// Global Keyboard & Remote Listeners
-window.addEventListener('keydown', (e) => {
-    if (['input', 'textarea', 'select'].includes(document.activeElement.tagName.toLowerCase())) return;
-    const scope = getAlpineScope();
-    if (!scope) return;
+                function triggerNativeCast() {
+                    const video = document.getElementById('videoPlayer');
+                    if (video && video.webkitShowPlaybackTargetPicker) {
+                        video.webkitShowPlaybackTargetPicker();
+                    } else if (window.chrome && window.chrome.cast) {
+                        cast.framework.CastContext.getInstance().requestSession();
+                    } else {
+                        alert('Casting is supported via Google Cast on Chrome or AirPlay on Safari.');
+                    }
+                }
 
-    switch(e.key) {
-        case ' ':
-        case 'k':
-            scope.togglePlay(); e.preventDefault(); break;
-        case 'f':
-            scope.toggleFullscreen(); e.preventDefault(); break;
-        case 'm':
-            scope.toggleMute(); e.preventDefault(); break;
-        case 'p':
-            scope.togglePiP(); e.preventDefault(); break;
-        case 'ArrowUp':
-            scope.setVolume(Math.min(1, scope.volume + 0.1)); e.preventDefault(); break;
-        case 'ArrowDown':
-            scope.setVolume(Math.max(0, scope.volume - 0.1)); e.preventDefault(); break;
-        case 'ArrowRight':
-            if (scope.relatedSlugs.length > 0) window.location.href = 'watch/' + encodeURIComponent(scope.relatedSlugs[0]);
-            break;
-        case 'ArrowLeft':
-            if (scope.relatedSlugs.length > 0) window.location.href = 'watch/' + encodeURIComponent(scope.relatedSlugs[scope.relatedSlugs.length - 1]);
-            break;
-    }
-});
+                function startNoiseAnimation() {
+                    const canvas = document.getElementById('noiseCanvas');
+                    if (!canvas) return;
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 240;
+                    canvas.height = 160;
+                    clearInterval(noiseInterval);
+                    noiseInterval = setInterval(() => {
+                        const idata = ctx.createImageData(canvas.width, canvas.height);
+                        const buffer32 = new Uint32Array(idata.data.buffer);
+                        const len = buffer32.length;
+                        for (let i = 0; i < len; i++) {
+                            if (Math.random() < 0.5) buffer32[i] = 0xffffffff;
+                        }
+                        ctx.putImageData(idata, 0, 0);
+                    }, 45);
+                }
 
-// Automatic Landscape Mobile Fullscreen Engine
-document.addEventListener('DOMContentLoaded', () => {
-    initPlayer(false);
+                function stopNoiseAnimation() {
+                    clearInterval(noiseInterval);
+                }
 
-    // Scroll-down Floating Mini-Player Observer
-    const sentinel = document.getElementById('playerSentinel');
-    if (sentinel && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            const scope = getAlpineScope();
-            if (!scope) return;
-            scope.isFloating = !entries[0].isIntersecting;
-        }, { threshold: 0.1 });
-        observer.observe(sentinel);
-    }
+                function setQualityLevel(lvlIdx) {
+                    if (hlsInstance) {
+                        hlsInstance.currentLevel = lvlIdx;
+                        const scope = getAlpineScope();
+                        if (scope) scope.currentLevel = lvlIdx;
+                    }
+                }
 
-    const container = document.getElementById('videoPlayerViewport');
-    const video = document.getElementById('videoPlayer');
+                function setAudioTrack(trackIdx) {
+                    if (hlsInstance) {
+                        hlsInstance.audioTrack = trackIdx;
+                        const scope = getAlpineScope();
+                        if (scope) scope.currentAudioTrack = trackIdx;
+                    }
+                }
 
-    function enterMobileFullscreen() {
-        if (!container) return;
-        if (container.requestFullscreen) {
-            container.requestFullscreen().catch(() => {});
-        } else if (container.webkitRequestFullscreen) {
-            container.webkitRequestFullscreen();
-        } else if (video && video.webkitEnterFullscreen) {
-            video.webkitEnterFullscreen();
-        }
-    }
+                function initPlayer() {
+                    if (isEmbed) return;
+                    const video = document.getElementById('videoPlayer');
+                    const errorBox = document.getElementById('playerError');
+                    if (!video || !errorBox) return;
 
-    function exitMobileFullscreen() {
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen().catch(() => {});
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            }
-        }
-    }
+                    errorBox.classList.add('hidden');
+                    stopNoiseAnimation();
 
-    function checkOrientation() {
-        if (window.innerWidth > 1024 && !('ontouchstart' in window)) return;
+                    if (hlsInstance) {
+                        hlsInstance.destroy();
+                        hlsInstance = null;
+                    }
 
-        const isLandscape = window.matchMedia("(orientation: landscape)").matches 
-                            || (window.orientation === 90 || window.orientation === -90);
+                    if (Hls.isSupported() && originalStream.includes('.m3u8')) {
+                        hlsInstance = new Hls({
+                            enableWorker: true,
+                            lowLatencyMode: true,
+                            backBufferLength: 60
+                        });
 
-        if (isLandscape) {
-            const isPlaying = video ? !video.paused : true;
-            if (isPlaying) {
-                enterMobileFullscreen();
-            }
-        } else {
-            exitMobileFullscreen();
-        }
-    }
+                        hlsInstance.loadSource(originalStream);
+                        hlsInstance.attachMedia(video);
 
-    if (screen.orientation) {
-        screen.orientation.addEventListener('change', checkOrientation);
-    }
-    window.addEventListener('orientationchange', () => {
-        setTimeout(checkOrientation, 200);
-    });
-    const mql = window.matchMedia('(orientation: landscape)');
-    if (mql.addEventListener) {
-        mql.addEventListener('change', checkOrientation);
-    }
-});
-</script>
+                        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                            const scope = getAlpineScope();
+                            if (scope) {
+                                scope.levels = hlsInstance.levels || [];
+                                scope.currentLevel = hlsInstance.currentLevel;
+                                scope.audioTracks = hlsInstance.audioTracks || [];
+                                scope.currentAudioTrack = hlsInstance.audioTrack;
+                            }
+                            video.play().catch(() => {});
+                        });
 
-</main>
+                        hlsInstance.on(Hls.Events.AUDIO_TRACKS_UPDATED, function () {
+                            const scope = getAlpineScope();
+                            if (scope) {
+                                scope.audioTracks = hlsInstance.audioTracks || [];
+                                scope.currentAudioTrack = hlsInstance.audioTrack;
+                            }
+                        });
 
-    
+                        hlsInstance.on(Hls.Events.ERROR, function (event, data) {
+                            if (data.fatal) {
+                                console.error("Fatal Stream error:", data);
+                                errorBox.classList.remove('hidden');
+                                startNoiseAnimation();
+                            }
+                        });
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl') || originalStream.endsWith('.mp4')) {
+                        video.src = originalStream;
+                        video.play().catch(() => {});
+                        video.onerror = () => {
+                            errorBox.classList.remove('hidden');
+                            startNoiseAnimation();
+                        };
+                    } else {
+                        video.src = originalStream;
+                    }
+                }
 
-                
+                // Global Keyboard & Remote Listeners
+                window.addEventListener('keydown', (e) => {
+                    if (['input', 'textarea', 'select'].includes(document.activeElement.tagName.toLowerCase())) return;
+                    const scope = getAlpineScope();
+                    if (!scope) return;
 
-    
-</body>
-</html>
+                    switch(e.key) {
+                        case ' ':
+                        case 'k':
+                            scope.togglePlay(); e.preventDefault(); break;
+                        case 'f':
+                            scope.toggleFullscreen(); e.preventDefault(); break;
+                        case 'm':
+                            scope.toggleMute(); e.preventDefault(); break;
+                        case 'p':
+                            scope.togglePiP(); e.preventDefault(); break;
+                        case 'ArrowUp':
+                            scope.setVolume(Math.min(1, scope.volume + 0.1)); e.preventDefault(); break;
+                        case 'ArrowDown':
+                            scope.setVolume(Math.max(0, scope.volume - 0.1)); e.preventDefault(); break;
+                        case 'ArrowRight':
+                            if (scope.relatedSlugs.length > 0) window.location.href = 'watch/' + encodeURIComponent(scope.relatedSlugs[0]);
+                            break;
+                        case 'ArrowLeft':
+                            if (scope.relatedSlugs.length > 0) window.location.href = 'watch/' + encodeURIComponent(scope.relatedSlugs[scope.relatedSlugs.length - 1]);
+                            break;
+                    }
+                });
+
+                // Automatic Landscape Mobile Fullscreen Engine
+                document.addEventListener('DOMContentLoaded', () => {
+                    initPlayer();
+
+                    // Scroll-down Floating Mini-Player Observer
+                    const sentinel = document.getElementById('playerSentinel');
+                    if (sentinel && 'IntersectionObserver' in window) {
+                        const observer = new IntersectionObserver((entries) => {
+                            const scope = getAlpineScope();
+                            if (!scope) return;
+                            scope.isFloating = !entries[0].isIntersecting;
+                        }, { threshold: 0.1 });
+                        observer.observe(sentinel);
+                    }
+
+                    const container = document.getElementById('videoPlayerViewport');
+                    const video = document.getElementById('videoPlayer');
+
+                    function enterMobileFullscreen() {
+                        if (!container) return;
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen().catch(() => {});
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (video && video.webkitEnterFullscreen) {
+                            video.webkitEnterFullscreen();
+                        }
+                    }
+
+                    function exitMobileFullscreen() {
+                        if (document.fullscreenElement || document.webkitFullscreenElement) {
+                            if (document.exitFullscreen) {
+                                document.exitFullscreen().catch(() => {});
+                            } else if (document.webkitExitFullscreen) {
+                                document.webkitExitFullscreen();
+                            }
+                        }
+                    }
+
+                    function checkOrientation() {
+                        if (window.innerWidth > 1024 && !('ontouchstart' in window)) return;
+
+                        const isLandscape = window.matchMedia("(orientation: landscape)").matches 
+                                            || (window.orientation === 90 || window.orientation === -90);
+
+                        if (isLandscape) {
+                            const isPlaying = video ? !video.paused : true;
+                            if (isPlaying) {
+                                enterMobileFullscreen();
+                            }
+                        } else {
+                            exitMobileFullscreen();
+                        }
+                    }
+
+                    if (screen.orientation) {
+                        screen.orientation.addEventListener('change', checkOrientation);
+                    }
+                    window.addEventListener('orientationchange', () => {
+                        setTimeout(checkOrientation, 200);
+                    });
+                    const mql = window.matchMedia('(orientation: landscape)');
+                    if (mql.addEventListener) {
+                        mql.addEventListener('change', checkOrientation);
+                    }
+                });
+                </script>
+
+            </main>
+
+        </body>
+    </html>
