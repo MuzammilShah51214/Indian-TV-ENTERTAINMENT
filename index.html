@@ -109,6 +109,13 @@
             transform: scale(1.1);
             box-shadow: 0 0 25px var(--neon-pink);
         }
+        
+       .jw-close-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+} 
+        
+        
 
         /* Server Selection Modal */
         .server-selection-modal {
@@ -497,7 +504,7 @@
          data-player="jw"
          data-direct="true"
          data-servers='[{"name": "Star Plus HD", "url": " ", "status": "online"}]'
-         data-logo="https://upload.wikimedia.org/wikipedia/en/d/d7/StarPlus_Logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+         
          data-name="STAR PLUS HD">
         <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/StarPlus_Logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original">
         <div class="channel-name">STAR PLUS HD</div>
@@ -507,13 +514,22 @@
         
         
         
-    <div class="channel-btn kids" 
+    <div class="channel-btn entertainment" 
              data-player="jw"
-             data-servers='[{"name": "Sony Pal", "url": "http://59.103.38.46:8000/play/a0ac/index.m3u8", "status": "online"}]'
+             data-servers='[
+
+{"name": "Sony TV", "url": "https://stream.ottplus.live/live/sony_ent_sd_abr/live/sony_ent_sd_720/chunks.m3u8", "status": "online"},
+         {"name": "Sony Max Server 1", "url": "https://stream.ottplus.live/live/max_hd_abr/live/max_hd_720/chunks.m3u8", "status": "online"},
+         {"name": "Sony Pal", "url": "http://59.103.38.46:8000/play/a0ac/index.m3u8", "status": "online", "direct": true},
+         
+      {"name": "Sony Yay", "url": "https://stream.ottplus.live/live/sony_yay_abr/live/sony_yay_720/chunks.m3u8", "status": "online"}   
+         
+     ]'
+     
              data-logo="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/7eadf686581049.5d9ddc140d66c.jpg"
-             data-name="Sony Pal">
+             data-name="Sony Tv">
             <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/7eadf686581049.5d9ddc140d66c.jpg">
-            <div class="channel-name">Sony Pal</div>
+            <div class="channel-name">Sony TV</div>
         </div>    
         
         
@@ -523,18 +539,28 @@
         
         
 
-        <!-- Colors TV (mixed) -->
+        
         <div class="channel-btn entertainment" 
              data-player="jw" 
              data-servers='[
-                 {"name": "Colors SD", "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8", "status": "online"}, 
-                 {"name": "Colors HD", "url": "https://v5on.site/play.php?id=276925", "status": "online"}
+                 {"name": "Colors SD", "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8", "status": "online"}
+                 
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_HD.png"
              data-name="Colors TV">
             <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_HD.png">
             <div class="channel-name">Colors TV</div>
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         <!-- Colors Rishtey -->
         <div class="channel-btn entertainment" 
@@ -549,19 +575,28 @@
             <div class="channel-name">Colors Rishtey</div>
         </div>      
 
-        <!-- Colors Cineplex -->
-        <div class="channel-btn movies" 
-             data-player="jw"
-             data-servers='[
-                 {"name": "Colors_Cineplex SD", "url": "https://v5on.site/play.php?id=48950", "status": "online"},
-                 {"name": "Colors_Cineplex HD", "url": "https://v5on.site/play.php?id=276940", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Cineplex.png"
-             data-name="Colors Cineplex">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Cineplex.png">
-            <div class="channel-name">Colors Cineplex</div>
-        </div>
 
+
+<a href="http://202.70.146.135:8000/play/a058/index.m3u8" 
+   target="_blank" 
+   rel="noopener"
+   class="channel-link">
+    <div class="channel-btn movies" 
+         data-player="jw"
+         data-direct="true"
+         data-servers='[{"name": "Colors Cineplex Bollywood", "url": " ", "status": "online"}]'
+         
+         data-name="Colors Cineplex Bollywood">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRtrdhy3TXm64b5twYW8znia6EsNxRJQMFiK-JcJ53Ww&s=10">
+        <div class="channel-name">Colors Cineplex Bollywood</div>
+    </div>
+</a>   
+
+
+
+
+
+        
         <!-- Zee TV (with ClearKey DRM – now JW Player handles it via clearkey) -->
         <div class="channel-btn entertainment" 
              data-player="jw"
@@ -836,7 +871,7 @@
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "Server 1", "url": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/yrf-music/df5ad691-27f7-4b6b-afe7-27584a66e39a/0.m3u8", "status": "online"},
+                 {"name": "Server 1", "url": "https://amg01412-xiaomiasia-yrfmusic-xiaomi-1rmk2.amagi.tv/playlist/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8", "status": "online"},
                  {"name": "Server 2", "url": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/YRF_Music.png"
@@ -849,7 +884,7 @@
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "Tabbar Hits", "url": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/tabbar-hits/1f6b3d35-3c40-48ca-837f-a1b3ad87045d/2.m3u8", "status": "online"}
+                 {"name": "Tabbar Hits", "url": "https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/index.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Tabbar_Hits.png"
              data-name="Tabbar Hits">
@@ -861,7 +896,7 @@
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "Music India", "url": "https://cdn-2.pishow.tv/live/226/master.m3u8", "status": "online"}
+                 {"name": "Music India", "url": "https://cdn.pishow.tv/ott/live/226/master.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Music_India.png"
              data-name="Music India">
@@ -874,8 +909,8 @@
              data-player="jw"
              data-servers='[
                  {"name": "9X JALWA Server 1", "url": "https://mumt03.tangotv.in/Dsly5z3H9XJALWA/index.m3u8", "status": "online"},
-                 {"name": "9X JALWA Server 2", "url": "https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8", "status": "online"},
-                 {"name": "9X JALWA Server 3", "url": "https://d14c63magvk61v.cloudfront.net/strm/channels/9xjalwa/master.m3u8", "status": "online"}
+                 {"name": "9X JALWA Server 2", "url": "https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8", "status": "online"}
+                 
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/9X_Jalwa.png"
              data-name="9X Jalwa">
@@ -887,10 +922,9 @@
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "9XM Server 1", "url": "https://9xjio.wiseplayout.com/9XM/master.m3u8", "status": "online"},
-                 {"name": "9XM Server 2", "url": "https://wiselp.wiseplayout.com/9XM/master.m3u8", "status": "online"},
-                 {"name": "9XM Server 3", "url": "https://d14c63magvk61v.cloudfront.net/strm/channels/9xm/master.m3u8", "status": "online"},
-                 {"name": "9XM Server 4", "url": "https://b.jsrdn.com/strm/channels/9xm/master.m3u8", "status": "online"}
+                 {"name": "9XM Server 1", "url": "https://9xjio.wiseplayout.com/9XM/master.m3u8", "status": "online"}
+                 
+                 
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/9XM.png"
              data-name="9XM">
@@ -903,8 +937,8 @@
              data-player="jw"
              data-servers='[
                  {"name": "9X TASHAN Server 1", "url": "https://wiselp.wiseplayout.com/9X_Tashan/SD504/SD504.m3u8", "status": "online"},
-                 {"name": "9X TASHAN Server 2", "url": "https://cdn-2.pishow.tv/live/1613/master.m3u8", "status": "online"},
-                 {"name": "9X TASHAN Server 3", "url": "http://longstream-06.ajaah.com/PlayBoxTV/9XTashan/playlist.m3u8", "status": "online"}
+                 
+                 {"name": "9X TASHAN Server 2", "url": "http://longstream-06.ajaah.com/PlayBoxTV/9XTashan/playlist.m3u8", "status": "online"}
              ]'
              data-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyxhClqMeVZmiLmZEqIztiXI0slI3M0dnNhZel0zbLSR-_0dwX64VssY&s=10"
              data-name="9X TASHAN">
@@ -912,41 +946,20 @@
             <div class="channel-name">9X TASHAN</div>
         </div>
 
-        <!-- Mastiii -->
-        <div class="channel-btn music" 
-             data-player="jw"
-             data-servers='[
-                 {"name": "Mastii", "url": "https://d1taaads3ztvmu.cloudfront.net/120723/mastii/chunklist.m3u8", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Mastiii.png"
-             data-name="Mastiii">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Mastiii.png">
-            <div class="channel-name">Mastiii</div>
-        </div>
+        
 
-        <!-- Desi Music Station -->
-        <div class="channel-btn music" 
+       <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=2252&e=.m3u8", "status": "online"}
+                 {"name": "MTV INDIA", "url": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:mtvindia.smil/playlist.m3u8", "status": "online"}
              ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Desi_Music_Station.png"
-             data-name="Desi Music Station">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Desi_Music_Station.png">
-            <div class="channel-name">Desi Music Station</div>
-        </div>
+             
+             data-name="epic bharat">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf_ekDsJ7cwMj7H1eUbbvUSqkiMTWRKW_goK3cUNAsewLzBC7wbArVQdMI&s=10">
+            <div class="channel-name">MTV INDIA</div>
+        </div> 
 
-        <!-- Nick Hindi -->
-        <div class="channel-btn kids" 
-             data-player="jw"
-             data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=545&e=.m3u8", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Nick_Hindi.png"
-             data-name="Nick Hindi">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Nick_Hindi.png">
-            <div class="channel-name">Nick Hindi</div>
-        </div>
+        
 
 
 
@@ -985,60 +998,47 @@
             <div class="channel-name">Epic music</div>
         </div>
 
-
-
-
-
-
-
-
-        <!-- Nickelodeon Jr -->
-        <div class="channel-btn kids" 
+<div class="channel-btn entertainment" 
              data-player="jw"
              data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=548&e=.m3u8", "status": "online"}
+                 {"name": "Epic Crime", "url": "https://cc-wsuyg2uxeak04.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-wsuyg2uxeak04/master.m3u8", "status": "online"}
              ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Nickelodeon_Jr.png"
-             data-name="Nickelodeon Jr">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Nickelodeon_Jr.png">
-            <div class="channel-name">Nickelodeon Jr</div>
+             data-logo="https://i.imgur.com/EFDsCkH.png"
+             data-name="epic">
+            <img src="https://i.imgur.com/EFDsCkH.png">
+            <div class="channel-name">Epic Crime</div>
         </div>
 
-        <!-- Discovery Kids 2 -->
-        <div class="channel-btn kids" 
-             data-player="jw"
-             data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=554&e=.m3u8", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Discovery_Kids_2.png"
-             data-name="Discovery Kids 2">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Discovery_Kids_2.png">
-            <div class="channel-name">Discovery Kids 2</div>
-        </div>
 
-        <!-- Sonic Hindi -->
-        <div class="channel-btn kids" 
-             data-player="jw"
-             data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=815&e=.m3u8", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/sonic_Hindi.png"
-             data-name="Sonic Hindi">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/sonic_Hindi.png">
-            <div class="channel-name">Sonic Hindi</div>
-        </div>
 
-        <!-- Power Kids TV -->
-        <div class="channel-btn kids" 
+
+
+
+        
+
+        
+
+ 
+<div class="channel-btn kids" 
              data-player="jw"
              data-servers='[
-                 {"name": "Server 1", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=2774&e=.m3u8", "status": "online"}
-             ]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Power_Kids_TV.png"
-             data-name="Power Kids TV">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Power_Kids_TV.png">
-            <div class="channel-name">Power Kids TV</div>
-        </div>
+
+{"name": "Sonic", "url": "http://103.185.24.134:3001/SONIC/index.m3u8", "status": "online", "direct": true},
+         
+         {"name": "NICK-JR", "url": "http://103.185.24.134:3001/NICK-JR/index.m3u8", "status": "online", "direct": true}
+     ]'
+ <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/sonic_Hindi.png">
+            <div class="channel-name">Cartoon Network</div>
+        </div>       
+             
+        
+
+
+
+
+
+
+       
 
         <!-- Zee Hindustan -->
         <div class="channel-btn news" 
@@ -1056,14 +1056,14 @@
         <div class="channel-btn movies" 
              data-player="jw"
              data-servers='[
-                 {"name": "B4U Movies Server 1", "url": "https://live2.shoq.com.pk/live/eds/B4U_Movies/DASH/B4U_Movies.mpd", "status": "online", "keyId": "bb0c6b6f0e2c873a174e63e16f3a3f62", "key": "a8c4fae3ea8023b51707e470ec336209"},
-                 {"name": "B4u Movies Server 2", "url": "https://cdn-2.pishow.tv/live/419/master.m3u8", "status": "online"},
-                 {"name": "B4u Movies Server 3", "url": "https://cdnb4u.wiseplayout.com/B4U_Movies/master.m3u8", "status": "online"},
-                 {"name": "B4u Movies Server 4", "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8", "status": "online"},
-                 {"name": "B4u Movies Server 5", "url": "https://d3kdywbtdfbp9z.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/dff423e0-3c82-46d6-9ecb-3baa96b5694a/4557ddf5-1c4d-4249-8107-c01212b917ec/0.m3u8", "status": "online"},
-                 {"name": "B4u Kadak 1", "url": "https://cdn-2.pishow.tv/live/227/master.m3u8", "status": "online"},
-                 {"name": "B4u Kadak 2", "url": "https://cdnb4u.wiseplayout.com/B4U_Kadak/master.m3u8", "status": "online"},
-                 {"name": "B4u Kadak 3", "url": "https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8", "status": "online"}
+                 
+                 {"name": "B4u Movies Server 1", "url": "https://cdn.pishow.tv/ott/live/419/master.m3u8", "status": "online"},
+                 
+                 {"name": "B4u Movies Server 2", "url": "https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8", "status": "online"},
+                 
+                 {"name": "B4u Kadak 1", "url": "https://cdn.pishow.tv/ott/live/227/master.m3u8", "status": "online"},
+                 
+                 {"name": "B4u Kadak 2", "url": "https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8", "status": "online"}
              ]'
              data-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYixZD7IsMHMmFyu-UH_Ucdpy33TsxzUvq8SIIhrTZqmhvru4XQyWsPfw&s=10"
              data-name="B4U Movies">
@@ -1075,10 +1075,9 @@
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "B4u Music Server 1", "url": "https://cdn-2.pishow.tv/live/415/master.m3u8", "status": "online"},
-                 {"name": "B4u Music Server 2", "url": "https://cdnb4u.wiseplayout.com/B4U_Music/master.m3u8", "status": "online"},
-                 {"name": "B4u Music Server 3", "url": "https://d3kdywbtdfbp9z.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/dff423e0-3c82-46d6-9ecb-3baa96b5694a/4598c408-0e38-488c-9b64-fc845d1ea2b6/0.m3u8", "status": "online"},
-                 {"name": "B4u Music Server 4", "url": "https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00877-b4unetworkeuropefast-b4umusic-xiaomiin/playlist.m3u8", "status": "online"}
+                 {"name": "B4u Music Server 1", "url": "https://cdn.pishow.tv/ott/live/415/master.m3u8", "status": "online"},
+                 
+                 {"name": "B4u Music Server 2", "url": "https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00877-b4unetworkeuropefast-b4umusic-xiaomiin/playlist.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/B4U_Music.png"
              data-name="B4u Music">
@@ -1098,22 +1097,14 @@
             <div class="channel-name">T Play</div>
         </div>
 
-        <!-- TV Asia -->
-        <div class="channel-btn entertainment" 
-             data-player="jw"
-             data-servers='[{"name": "TV Asia", "url": "https://mini.allinonereborn.fun/jiotv-www/app/live.php?id=3071&e=.m3u8", "status": "online"}]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/TV_Asia.png"
-             data-name="TV Asia">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/TV_Asia.png">
-            <div class="channel-name">TV Asia</div>
-        </div>
+        
 
         <!-- E 24 -->
         <div class="channel-btn music" 
              data-player="jw"
              data-servers='[
-                 {"name": "p Server 1", "url": "https://amg13643-amg13643c2-amgplt0016.playout.now3.amagi.tv/playlist/amg13643-amg13643c2-amgplt0016/playlist.m3u8", "status": "online"},
-                 {"name": "E 24 Server 2", "url": "https://bagnetwork.digivive.com/hlslive/Admin/px09241091/live/E24LiveB/chunklist_1.m3u8", "status": "online"}
+                 {"name": "E24 Server 1", "url": "https://amg13643-amg13643c2-amgplt0016.playout.now3.amagi.tv/playlist/amg13643-amg13643c2-amgplt0016/playlist.m3u8", "status": "online"},
+                 {"name": "E 24 Server 2", "url": "https://mumt04.tangotv.in/m18aqlK4E24/index.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/E_24.png"
              data-name="E 24">
@@ -1195,8 +1186,7 @@
              data-player="jw"
              data-servers='[
                  {"name": "Shemaroo TV", "url": "https://airtelapp.shemaroo.com/shemarootv/smil:shemarootvadp.smil/chunklist_b1628000_sleng.m3u8", "status": "online"},
-                 {"name": "Shemaroo-Filmigaane", "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/shemaroo-filmigaane/playlist.m3u8", "status": "online"},
-                 {"name": "Shemaroo-Bollywood", "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/shemaroo-bollywood/playlist.m3u8", "status": "online"},
+                 
                  {"name": "Shemaroo-Umang", "url": "https://airtelapp.shemaroo.com/shemarooumang/smil:shemarooumangadp.smil/chunklist_b1628000_sleng.m3u8", "status": "online"},
                  {"name": "Shemaroo-Josh", "url": "https://airtelapp.shemaroo.com/shemarooChumbakTV/smil:shemarooChumbakTVadp.smil/chunklist_b1628000_sleng.m3u8", "status": "online"}
              ]'
@@ -1210,9 +1200,9 @@
         <div class="channel-btn entertainment" 
              data-player="jw"
              data-servers='[
-                 {"name": "Manoranjan_TV", "url": "https://cdn-1.pishow.tv/live/1013/master.m3u8", "status": "online"},
-                 {"name": "Manoranjan_Movies", "url": "https://cdn-2.pishow.tv/live/228/master.m3u8", "status": "online"},
-                 {"name": "Manoranjan_Grand", "url": "https://cdn-1.pishow.tv/live/1011/master.m3u8", "status": "online"}
+                 {"name": "Manoranjan_TV", "url": "https://cdn.pishow.tv/ott/live/1013/master.m3u8", "status": "online"},
+                 {"name": "Manoranjan_Movies", "url": "https://mumt04.tangotv.in/m18aqlK4MANORANJANMOVIES/index.m3u8", "status": "online"},
+                 {"name": "Manoranjan_Grand", "url": "https://cdn.pishow.tv/ott/live/1011/master.m3u8", "status": "online"}
              ]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Manoranjan_TV.png"
              data-name="Manoranjan_TV">
@@ -1223,7 +1213,7 @@
         <!-- Maha_Movies -->
         <div class="channel-btn movies" 
              data-player="jw"
-             data-servers='[{"name": "Maha_Movies", "url": "https://cdn-6.pishow.tv/live/10007/master.m3u8", "status": "online"}]'
+             data-servers='[{"name": "Maha_Movies", "url": "https://cdn.pishow.tv/ott/live/10007/master.m3u8", "status": "online"}]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Maha_Movies.png"
              data-name="Maha_Movies">
             <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Maha_Movies.png">
@@ -1236,20 +1226,20 @@
              data-servers='[
                  {"name": "DD Bharati", "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/67cec794d8b14f9ba21f73924ac65797/index.m3u8", "status": "online"},
                  {"name": "DD National", "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index_3.m3u8", "status": "online"},
-                 {"name": "DD Kashir", "url": "https://mini.allinonereborn.fun/jiotv-www/app/ts_live_716.m3u8", "status": "online"},
+                 {"name": "DD Kashir", "url": "https://cdn.pishow.tv/ott/live/16/master.m3u8", "status": "online"},
                  {"name": "DD Punjabi", "url": "https://d3eyhgoylams0m.cloudfront.net/v1/manifest/93ce20f0f52760bf38be911ff4c91ed02aa2fd92/ed7bd2c7-8d10-4051-b397-2f6b90f99acb/20c8ad14-a158-4a42-8889-e032d070856e/2.m3u8", "status": "online"},
                  {"name": "DD News", "url": "https://ddlive.b-cdn.net/19/master.m3u8", "status": "online"}
              ]'
              data-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ5AwZokVNzOHGn-5_OJYBhCUv6lQyCaP8ilXwAJS6i5NJYQ9j29f3V3Bn&s=10"
              data-name="DD Bharati">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ5AwZokVNzOHGn-5_OJYBhCUv6lQyCaP8ilXwAJS6i5NJYQ9j29f3V3Bn&s=10">
-            <div class="channel-name">DD Bharati</div>
+            <div class="channel-name">DD Network</div>
         </div>
 
         <!-- Anjan_TV -->
         <div class="channel-btn entertainment" 
              data-player="jw"
-             data-servers='[{"name": "Anjan_TV", "url": "https://mini.allinonereborn.fun/jiotv-www/app/ts_live_919.m3u8", "status": "online"}]'
+             data-servers='[{"name": "Anjan_TV", "url": "https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/chunklist_b846000.m3u8", "status": "online"}]'
              data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Anjan_TV.png"
              data-name="Anjan_TV">
             <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Anjan_TV.png">
@@ -1289,7 +1279,7 @@
         <!-- Goldmines -->
         <div class="channel-btn movies" 
              data-player="jw"
-             data-servers='[{"name": "Goldmines", "url": "https://cdn-2.pishow.tv/live/1459/master.m3u8", "status": "online"}]'
+             data-servers='[{"name": "Goldmines", "url": "https://streams.tangotv.in/GOLDMINES/ORIGIN/index.m3u8", "status": "online"}]'
              data-logo="https://i.pinimg.com/736x/1c/9a/08/1c9a085c1fe6a240cfa29004c0a36b05.jpg"
              data-name="Goldmines">
             <img src="https://i.pinimg.com/736x/1c/9a/08/1c9a085c1fe6a240cfa29004c0a36b05.jpg">
@@ -1299,7 +1289,7 @@
         <!-- Goldmines Bollywood -->
         <div class="channel-btn movies" 
              data-player="jw"
-             data-servers='[{"name": "Goldmines Bollywood", "url": "https://cdn-2.pishow.tv/live/1460/master.m3u8", "status": "online"}]'
+             data-servers='[{"name": "Goldmines Bollywood", "url": "https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8", "status": "online"}]'
              data-logo="https://i.pinimg.com/736x/a3/e6/61/a3e661d1dfac520cfed7e1dd44bb8581.jpg"
              data-name="Goldmines Bollywood">
             <img src="https://i.pinimg.com/736x/a3/e6/61/a3e661d1dfac520cfed7e1dd44bb8581.jpg">
@@ -1309,21 +1299,21 @@
         <!-- Goldmines Movies -->
         <div class="channel-btn movies" 
              data-player="jw"
-             data-servers='[{"name": "Goldmines Movies", "url": "https://cdn-2.pishow.tv/live/1461/master.m3u8", "status": "online"}]'
+             data-servers='[{"name": "Goldmines Movies", "url": "https://mumt03.tangotv.in/Dsly5z3HGOLDMINESACTION/index.m3u8", "status": "online"}]'
              data-logo="https://i.pinimg.com/736x/09/62/d9/0962d9a7c965d5ecb70f1a6f5c8f93dd.jpg"
              data-name="Goldmines Movies">
             <img src="https://i.pinimg.com/736x/09/62/d9/0962d9a7c965d5ecb70f1a6f5c8f93dd.jpg">
             <div class="channel-name">Goldmines Movies</div>
         </div>
 
-        <!-- Arre TV -->
-        <div class="channel-btn entertainment" 
+        
+        <div class="channel-btn kida" 
              data-player="jw"
-             data-servers='[{"name": "Arre TV", "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/arre/master.m3u8", "status": "online"}]'
-             data-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Arre.png"
-             data-name="Arre TV">
-            <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Arre.png">
-            <div class="channel-name">Arre TV</div>
+             data-servers='[{"name": "pogo", "url": "https://stream.ottplus.live/live/pogo_sd_abr/index.m3u8", "status": "online"}]'
+             data-logo="https://i.pinimg.com/736x/48/12/00/481200014c9442daf67e9faaac2ec098.jpg"
+             data-name="pogo">
+            <img src="https://i.pinimg.com/736x/48/12/00/481200014c9442daf67e9faaac2ec098.jpg">
+            <div class="channel-name">Pogo</div>
         </div>
 
         <!-- Joo Music -->
@@ -1459,16 +1449,37 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
 
     let jwplayerInstance = null;
+    let closeBtnTimer = null;   // for auto-hide close button
 
-    // ---------- CLOSE PLAYER ----------
+    // ---------- CLOSE PLAYER (stop + hide) ----------
     function closePlayer() {
         jwFixedWrapper.classList.remove('visible');
         if (jwplayerInstance) {
             try { jwplayerInstance.stop(); } catch(e) {}
         }
+        if (closeBtnTimer) {
+            clearTimeout(closeBtnTimer);
+            closeBtnTimer = null;
+        }
     }
 
-    // ---------- BUILD CLEARKEY DRM OBJECT (JW Player format) ----------
+    // ---------- HIDE CLOSE BUTTON AFTER 5s, SHOW ON INTERACTION ----------
+    function startCloseBtnTimer() {
+        if (closeBtnTimer) clearTimeout(closeBtnTimer);
+        closeBtnTimer = setTimeout(() => {
+            jwCloseBtn.classList.add('hidden');
+        }, 5000);
+    }
+
+    function showCloseBtnTemporarily() {
+        if (closeBtnTimer) clearTimeout(closeBtnTimer);
+        jwCloseBtn.classList.remove('hidden');
+        if (jwFixedWrapper.classList.contains('visible')) {
+            startCloseBtnTimer();
+        }
+    }
+
+    // ---------- BUILD CLEARKEY DRM OBJECT ----------
     function buildClearKeyDRM(server) {
         if (server.keyId && server.key && server.keyId.length > 0 && server.key.length > 0) {
             return {
@@ -1481,7 +1492,7 @@
         return null;
     }
 
-    // ---------- CHECK IF URL IS DIRECT MEDIA (m3u8, mpd, mp4) ----------
+    // ---------- CHECK IF URL IS DIRECT MEDIA ----------
     function isDirectMedia(url) {
         if (!url) return false;
         const lower = url.toLowerCase();
@@ -1494,19 +1505,33 @@
 
     // ---------- JW PLAYER SETUP ----------
     function setupJWPlayer(server, logoUrl, channelName) {
+        
+        // ✅✅✅ NEW: Agar server.direct === true ho to seedha new tab me open karo ✅✅✅
+        if (server.direct === true) {
+            window.open(server.url, '_blank');
+            serverModal.classList.remove('active');
+            closePlayer();  // JW Player band karo agar chal raha ho
+            return;
+        }
+        
+        // Agar URL direct media nahi hai (jaise play.php), to new tab me kholo
         if (!isDirectMedia(server.url)) {
             window.open(server.url, '_blank');
             serverModal.classList.remove('active');
+            closePlayer();
             return;
         }
 
+        // ✅ Show fixed player
         jwFixedWrapper.classList.add('visible');
 
+        // Destroy previous instance
         if (jwplayerInstance) {
             try { jwplayerInstance.remove(); } catch(e) {}
             jwplayerInstance = null;
         }
 
+        // ✅ Config WITHOUT 'logo' property
         const config = {
             file: server.url,
             width: '100%',
@@ -1516,12 +1541,6 @@
             primary: 'html5',
             hlshtml: true,
             stretching: 'uniform',
-            logo: {
-                file: logoUrl,
-                link: '#',
-                position: 'top-left',
-                margin: '10'
-            },
             title: channelName,
             dash: true,
             fallback: true,
@@ -1549,13 +1568,11 @@
 
         jwplayerInstance.on('ready', function() {
             console.log('JW Player ready:', server.name);
+            showCloseBtnTemporarily();
         });
 
         jwplayerInstance.on('error', function(err) {
             console.warn('JW Player error:', err);
-            if (err && err.code === 102630 && lowerUrl.includes('.mpd')) {
-                console.log('MPD failed, trying fallback...');
-            }
         });
 
         serverModal.classList.remove('active');
@@ -1565,16 +1582,15 @@
     channelButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             
-            // ✅✅✅ NEW: DIRECT BROWSER PLAY (SONY TEN 1 & 2) ✅✅✅
+            // Direct browser play wale channels (Star Plus HD jese)
             if (this.getAttribute('data-direct') === 'true') {
-                // JS kuch nahi karega - <a> tag khud new tab khol dega
-                // Bas active highlight kar dein
+                closePlayer();
                 channelButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                return; // Yahan se wapas, modal mat kholo
+                return;  // <a> tag khud new tab khol dega
             }
 
-            // ---------- NORMAL CHANNELS (MODAL KE SAATH) ----------
+            // Normal channels (modal ke saath)
             e.preventDefault();
             e.stopPropagation();
 
@@ -1594,7 +1610,9 @@
                 opt.className = `server-option ${server.status === 'online' ? '' : 'disabled'}`;
 
                 let typeTag = '';
-                if (server.url) {
+                if (server.direct === true) {
+                    typeTag = '[DIRECT]';
+                } else if (server.url) {
                     if (server.url.includes('.mpd')) typeTag = '[MPD/DASH]';
                     else if (server.url.includes('.m3u8')) typeTag = '[M3U8/HLS]';
                     else typeTag = '[LINK]';
@@ -1658,7 +1676,32 @@
         }
     });
 
-    console.log('✅ JW Player fixed for MPD/DASH + ClearKey + Direct Play.');
+    // ---------- SHOW CLOSE BUTTON ON TOUCH/CLICK ----------
+    jwFixedWrapper.addEventListener('touchstart', () => {
+        if (jwFixedWrapper.classList.contains('visible')) {
+            showCloseBtnTemporarily();
+        }
+    }, { passive: true });
+
+    jwFixedWrapper.addEventListener('mousedown', () => {
+        if (jwFixedWrapper.classList.contains('visible')) {
+            showCloseBtnTemporarily();
+        }
+    });
+
+    jwPlayerContainer.addEventListener('touchstart', () => {
+        if (jwFixedWrapper.classList.contains('visible')) {
+            showCloseBtnTemporarily();
+        }
+    }, { passive: true });
+
+    jwPlayerContainer.addEventListener('mousedown', () => {
+        if (jwFixedWrapper.classList.contains('visible')) {
+            showCloseBtnTemporarily();
+        }
+    });
+
+    console.log('✅ JW Player: direct servers new tab me khulenge, baaki JW me play honge.');
 })();
 </script>
 </body>
