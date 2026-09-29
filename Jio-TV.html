@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <title>AllInOne Reborn • Live TV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { 
+            background: #0a0a0f; 
+            min-height: 100vh; 
+            width: 100vw; 
+            font-family: system-ui, sans-serif; 
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== PLAYER (TOP -40px FIXED) ===== */
+        #playerWrapper {
+            position: fixed;
+            top: -40px;
+            left: 0;
+            width: 100%;
+            height: 40vh;
+            background: #000;
+            z-index: 9999;
+            overflow: hidden;
+            display: none;
+            border-bottom: 2px solid #ff2d55;
+        }
+        #playerWrapper.active { display: block; }
+
+        #closePlayerBtn {
+            position: absolute;
+            top: 48px;
+            right: 8px;
+            z-index: 10001;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 45, 85, 0.95);
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        #closePlayerBtn:active { transform: scale(0.92); }
+
+        #liveBadge {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            z-index: 10001;
+            background: #ff0000;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        #playerWrapper .shaka-video-container,
+        #playerWrapper #playerContainer {
+            position: absolute !important;
+            top: 40px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100% - 40px) !important;
+            transform: none !important;
+            margin: 0 !important;
+        }
+        #playerWrapper video {
+            width: 100% !important;
+            height: 100% !important;
+            background: #000;
+            object-fit: contain;
+        }
+        #playerWrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .shaka-spinner-container, .shaka-spinner, .shaka-spinner-svg { display: none !important; }
+
+        /* ===== CHANNELS SECTION ===== */
+        #channelsSection {
+            padding: 0 10px 60px;
+            transition: margin-top 0.3s;
+        }
+        /* Player ke height (40vh) se 40px minus kiya, kyunki player top -40px par hai */
+        #channelsSection.shifted { 
+            margin-top: calc(40vh - 40px);   /* 👈 FIX: filters player ke paas aa gaye */
+            padding-top: 6px;
+        }
+
+        .app-header { text-align: center; padding: 8px 0 6px; }
+        .app-header h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff2d55, #ff9500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== CATEGORY FILTERS (POORI SPELLING, WRAP HO JAYE) ===== */
+        .category-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 4px 0 12px;      /* 👈 thoda compact padding */
+            width: 100%;
+        }
+        .cat-pill {
+            padding: 6px 10px;
+            border-radius: 14px;
+            background: #1a1a24;
+            color: #b0b0c0;
+            font-size: 0.62rem;
+            font-weight: 700;
+            border: 1px solid #26263a;
+            cursor: pointer;
+            white-space: nowrap;
+            text-align: center;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            line-height: 1.1;
+        }
+        .cat-pill.active {
+            background: linear-gradient(90deg, #ff2d55, #ff6b9d);
+            color: #fff;
+            border-color: #ff2d55;
+            box-shadow: 0 3px 10px rgba(255, 45, 85, 0.4);
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .channel-card {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #14141c;
+            cursor: pointer;
+            aspect-ratio: 16/10;
+            border: 1px solid #22222e;
+            transition: transform 0.15s;
+        }
+        .channel-card:active { transform: scale(0.97); }
+        .channel-card.hidden { display: none; }
+        .channel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .channel-card .live-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff0000;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+        .channel-card .ch-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 10px 8px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .no-channels {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #888;
+            padding: 50px 0;
+            font-size: 0.95rem;
+        }
+
+        #loadingText {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 0.95rem;
+            z-index: 9998;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 24px;
+            border-radius: 30px;
+            display: none;
+        }
+
+        .error-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 10000; }
+        .error-modal.hidden { display: none !important; }
+        .error-content { background: #1e1e2f; border-radius: 20px; padding: 28px; max-width: 520px; width: 90%; text-align: center; color: #f0f0f0; }
+        .error-content h3 { color: #ff6b6b; margin-bottom: 15px; font-size: 1.4rem; }
+        .error-content p { font-size: 1rem; line-height: 1.4; margin-bottom: 1.5rem; }
+        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+        .btn { background: #ff4444; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PLAYER ===== -->
+    <div id="playerWrapper">
+        <div id="liveBadge">● LIVE</div>
+        <button id="closePlayerBtn" onclick="closePlayer()">✕</button>
+        <div id="playerContainer" class="shaka-video-container" data-shaka-player-container>
+            <video id="video" autoplay playsinline preload="metadata"></video>
+        </div>
+    </div>
+
+    <!-- ===== CHANNELS SECTION ===== -->
+    <div id="channelsSection">
+        <div class="app-header"></div>
+
+        <div class="category-row" id="categoryRow">
+            <button class="cat-pill active" data-cat="ALL">ALL</button>
+            <button class="cat-pill" data-cat="ENTERTAINMENT">ENTERTAINMENT</button>
+            <button class="cat-pill" data-cat="MOVIES">MOVIES</button>
+            <button class="cat-pill" data-cat="MUSIC">MUSIC</button>
+            <button class="cat-pill" data-cat="SPORTS">SPORTS</button>
+            <button class="cat-pill" data-cat="DOCUMENTARY">DOCUMENTARY</button>
+            <button class="cat-pill" data-cat="KIDS">KIDS</button>
+            <button class="cat-pill" data-cat="NEWS">NEWS</button>
+        </div>
+
+        <div class="channel-grid" id="channelGrid">
+            <div class="channel-card" data-id="144" data-category="ENTERTAINMENT" onclick="playChannel(this)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaEFkEfufrVQTRdFIncmey-PsnhvtMbjZ7-x7GWTZzVH4DdwCx2PMrQjU&s=10" alt="Colors HD"/>
+                <span class="live-tag">LIVE</span>
+                <span class="ch-name">Colors HD</span>
+            </div>
+
+            <div class="channel-card" data-id="145" data-category="ENTERTAINMENT" onclick="playChannel(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Star_Bharat_logo.svg/512px-Star_Bharat_logo.svg.png" alt="Star Bharat"/>
+                <span class="live-tag">LIVE</span>
+                <span class="ch-name">Star Bharat</span>
+            </div>
+
+            <div class="channel-card" data-id="156" data-category="MOVIES" onclick="playChannel(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Star_Gold_2_logo.png/512px-Star_Gold_2_logo.png" alt="Star Gold 2"/>
+                <span class="live-tag">LIVE</span>
+                <span class="ch-name">Star Gold 2</span>
+            </div>
+
+            <div class="channel-card" data-id="147" data-category="ENTERTAINMENT" onclick="playChannel(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1f/Sony_Entertainment_Television_logo.svg/512px-Sony_Entertainment_Television_logo.svg.png" alt="Sony TV"/>
+                <span class="live-tag">LIVE</span>
+                <span class="ch-name">Sony TV</span>
+            </div>
+
+            <div class="channel-card" data-id="279" data-category="ENTERTAINMENT" onclick="playChannel(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Colors_Rishtey_logo.png/512px-Colors_Rishtey_logo.png" alt="Colors Rishtey"/>
+                <span class="live-tag">LIVE</span>
+                <span class="ch-name">Colors Rishtey</span>
+            </div>
+        </div>
+
+        <div class="no-channels" id="noChannels" style="display:none;">
+            No channels in this category.
+        </div>
+    </div>
+
+    <div id="loadingText">Loading channel...</div>
+
+    <div id="errorModal" class="error-modal hidden">
+        <div class="error-content">
+            <h3 id="errorTitle">Playback Error</h3>
+            <p id="errorMessage"></p>
+            <div class="btn-group">
+                <button class="btn" onclick="location.reload()">Refresh</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.open = function() { console.warn("Blocked pop-up."); return null; };
+
+        let player = null;
+        let allChannels = [];
+        let currentChannelId = null;
+        let currentCategory = 'ALL';
+
+        function showLoading(text) {
+            const el = document.getElementById('loadingText');
+            el.textContent = text || 'Loading...';
+            el.style.display = 'block';
+        }
+        function hideLoading() {
+            document.getElementById('loadingText').style.display = 'none';
+        }
+        function showError(title, msg) {
+            document.getElementById('errorTitle').textContent = title;
+            document.getElementById('errorMessage').innerHTML = msg;
+            document.getElementById('errorModal').classList.remove('hidden');
+            hideLoading();
+        }
+
+        function applyFilter(category) {
+            currentCategory = category;
+            const cards = document.querySelectorAll('.channel-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardCat = (card.getAttribute('data-category') || '').toUpperCase();
+                const show = (category === 'ALL') || (cardCat === category);
+                if (show) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('noChannels').style.display = 
+                visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function initCategoryFilters() {
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    applyFilter(btn.dataset.cat);
+                });
+            });
+        }
+
+        async function playChannel(cardElement) {
+            const channelId = cardElement.getAttribute('data-id');
+            if (!channelId) {
+                showError('Error', 'Channel ID missing.');
+                return;
+            }
+            await playChannelById(channelId);
+        }
+
+        async function playChannelById(channelId) {
+            document.getElementById('playerWrapper').classList.add('active');
+            document.getElementById('channelsSection').classList.add('shifted');
+
+            const channelName = document.querySelector(`.channel-card[data-id="${channelId}"] .ch-name`)?.textContent || ('Channel ' + channelId);
+            showLoading('Loading ' + channelName + '...');
+
+            if (player) {
+                try { await player.destroy(); } catch(e){}
+                player = null;
+            }
+
+            currentChannelId = channelId;
+
+            let channel = allChannels.find(ch => String(ch.channel_id) === String(channelId));
+
+            if (!channel) {
+                console.warn('Channel not in JSON, trying without token:', channelId);
+                channel = { channel_id: channelId };
+            }
+
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = '<video id="video" autoplay playsinline preload="metadata"></video>';
+            const videoEl = document.getElementById('video');
+            videoEl.muted = false;
+            videoEl.volume = 1.0;
+
+            player = new shaka.Player(videoEl);
+            const ui = new shaka.ui.Overlay(player, container, videoEl);
+            ui.configure({
+                controlPanelElements: ['play_pause', 'mute', 'volume', 'spacer', 'quality', 'fullscreen'],
+                addBigPlayButton: true
+            });
+
+            const drmConfig = (channel.drm && Object.keys(channel.drm).length > 0)
+                ? { clearKeys: channel.drm } : {};
+
+            player.configure({
+                drm: drmConfig,
+                streaming: {
+                    lowLatencyMode: true,
+                    bufferingGoal: 15,
+                    retryParameters: { timeout: 15000, maxAttempts: 3 }
+                }
+            });
+
+            player.getNetworkingEngine().registerRequestFilter((type, request) => {
+                let targetUrl = request.uris[0];
+                if (channel.token && !targetUrl.includes('__hdnea__=')) {
+                    const sep = targetUrl.includes('?') ? '&' : '?';
+                    targetUrl += sep + channel.token;
+                }
+                request.uris[0] = 'https://corsproxy.io/?' + encodeURIComponent(targetUrl);
+            });
+
+            try {
+                let streamUrl = channel.mpd || channel.stream_url || channel.url;
+                if (!streamUrl) throw new Error('No stream URL found for this channel');
+                if (channel.token && !streamUrl.includes('__hdnea__=')) {
+                    streamUrl += (streamUrl.includes('?') ? '&' : '?') + channel.token;
+                }
+
+                await player.load(streamUrl);
+                hideLoading();
+                document.title = channelName + ' • AllInOne';
+
+                const enableAudio = () => {
+                    videoEl.muted = false;
+                    videoEl.volume = 1.0;
+                    videoEl.play().catch(()=>{});
+                    window.removeEventListener('click', enableAudio);
+                    window.removeEventListener('touchstart', enableAudio);
+                };
+                window.addEventListener('click', enableAudio);
+                window.addEventListener('touchstart', enableAudio);
+
+            } catch (err) {
+                console.error('Stream error:', err);
+                container.innerHTML = `<iframe src="https://jjtvxweb.pages.dev/pworld.html?id=${channelId}" 
+                    sandbox="allow-scripts allow-same-origin allow-forms" 
+                    allowfullscreen allow="encrypted-media; autoplay"></iframe>`;
+                hideLoading();
+            }
+        }
+
+        function closePlayer() {
+            document.getElementById('playerWrapper').classList.remove('active');
+            document.getElementById('channelsSection').classList.remove('shifted');
+            if (player) {
+                player.destroy().catch(()=>{});
+                player = null;
+            }
+            document.getElementById('playerContainer').innerHTML = 
+                '<video id="video" autoplay playsinline preload="metadata"></video>';
+            currentChannelId = null;
+            document.title = 'AllInOne Reborn • Live TV';
+        }
+
+        async function initApp() {
+            shaka.polyfill.installAll();
+            initCategoryFilters();
+
+            try {
+                const resp = await fetch('https://jjtvxweb.pages.dev/den-ww.json?cache=' + Date.now());
+                allChannels = await resp.json();
+                console.log('✅ Loaded', allChannels.length, 'channels from JSON');
+            } catch (err) {
+                console.warn('⚠️ JSON load failed:', err);
+                allChannels = [];
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
